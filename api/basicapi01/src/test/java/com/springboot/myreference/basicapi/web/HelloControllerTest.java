@@ -29,7 +29,7 @@ public class HelloControllerTest {
     private MockMvc mvc; // 웹 API 테스트 할때 사용 , 스프링 MVC 테스트의 시작점, 이 클래스를 통해 HTTP GET, POST 등에 대한 API 테스트를 수행
 
     @Test
-    public void hello가_리턴된다() throws Exception{
+    public void hello가_리턴된다() throws Exception{ // tests passed
         String hello = "hello";
 
 /*  mvc.perform(get("/hello"))
