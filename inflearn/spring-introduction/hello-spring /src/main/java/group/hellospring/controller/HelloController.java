@@ -25,4 +25,23 @@ public class HelloController {
     public String helloString(@RequestParam("name") String name) {
         return "hello " + name; // hello spring
     }
+
+    @GetMapping("hello-api") // api 방식 실무 사용 예시
+    @ResponseBody
+    public Hello helloApi(@RequestParam("name") String name) {
+        Hello hello = new Hello();
+        hello.setName(name);
+        return hello;
+    }
+    static class Hello{
+        private String name;
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+    }
 }
