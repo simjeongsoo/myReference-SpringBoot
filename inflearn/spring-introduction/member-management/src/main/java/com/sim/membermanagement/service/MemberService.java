@@ -2,21 +2,16 @@ package com.sim.membermanagement.service;
 
 import com.sim.membermanagement.domain.Member;
 import com.sim.membermanagement.repository.MemberRepository;
-import com.sim.membermanagement.repository.MemoryMemberRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
-@Service
 public class MemberService {
 
     // 기존에는 회원 서비스가 메모리 회원 리포지토리를 직접 생성 -> private final MemberRepository memberRepository = new MemoryMemberRepository();
     private final MemberRepository memberRepository;
 
     // 회원 리포지토리의 코드가 회원 서비스 코드를 DI 가능하게 변경
-    @Autowired
     public MemberService(MemberRepository memberRepository) {
         this.memberRepository = memberRepository;
     }
