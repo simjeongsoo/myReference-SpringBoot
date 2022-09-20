@@ -4,8 +4,11 @@ import com.sim.membermanagement.domain.Member;
 import com.sim.membermanagement.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import java.util.List;
 
 @Controller //어노테이션을 달면 아무런기능이 없는 MemberController도 스프링컨테이너가 객체를 만들어 bean에 넣어두고 관리
 public class MemberController {
@@ -32,5 +35,12 @@ public class MemberController {
         memberService.join(member);
 
         return "redirect:/";
+    }
+
+    @GetMapping("/members") // 회원 조회 기능
+    public String list(Model model) {
+        List<Member> members = memberService.findMembers();
+        model.addAttribute("members", members);
+        return "members/memberList";
     }
 }
