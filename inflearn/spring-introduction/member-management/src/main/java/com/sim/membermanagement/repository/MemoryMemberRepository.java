@@ -1,9 +1,11 @@
 package com.sim.membermanagement.repository;
 
 import com.sim.membermanagement.domain.Member;
+import org.springframework.stereotype.Repository;
 
 import java.util.*;
 
+@Repository
 public class MemoryMemberRepository implements MemberRepository{
     // 구현체 , 메소드 기능구현
     // 초기 개발 단계에서는 구현체로 가벼운 메모리 기반의 데이터 저장소 사용
