@@ -12,8 +12,14 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class MemberServiceTest {
 
-    MemberService memberService = new MemberService();
-    MemoryMemberRepository memberRepository = new MemoryMemberRepository();
+    MemberService memberService;
+    MemoryMemberRepository memberRepository;
+
+    @BeforeEach // 테스트가 수행되기 전에 각각 실행 (테스트의 독립성을 위해)
+    public void beforeEach() {
+        memberRepository = new MemoryMemberRepository(); // MemoryMemberRepository 생성
+        memberService = new MemberService(memberRepository); // MemberService를 생성하면서 memberRepository 주입
+    }
 
     @AfterEach // 각 테스트가 종료될 때 마다 이 메서드를 실행
     public void afterEach() {
