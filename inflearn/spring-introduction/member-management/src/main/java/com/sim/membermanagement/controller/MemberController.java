@@ -10,7 +10,7 @@ public class MemberController {
     private final MemberService memberService;
 
     @Autowired // 의존관계 추가
-    public MemberController(MemberService memberService) { // MemberService 주입 
+    public MemberController(MemberService memberService) { // MemberService 주입
         this.memberService = memberService;
     }
 }
