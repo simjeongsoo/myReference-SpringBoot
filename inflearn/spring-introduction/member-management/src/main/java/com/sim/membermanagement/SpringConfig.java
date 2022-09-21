@@ -1,6 +1,6 @@
 package com.sim.membermanagement;
 
-import com.sim.membermanagement.repository.JdbcMemberRepository;
+import com.sim.membermanagement.repository.JdbcTemplateMemberRepository;
 import com.sim.membermanagement.repository.MemberRepository;
 import com.sim.membermanagement.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +27,7 @@ public class SpringConfig {
     @Bean
     public MemberRepository memberRepository() {
 //        return new MemoryMemberRepository();
-        return new JdbcMemberRepository(dataSource);// 구현체 변경, OCP
+//        return new JdbcMemberRepository(dataSource);
+        return new JdbcTemplateMemberRepository(dataSource); // 구현체 교체, OCP
     }
 }
