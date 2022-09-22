@@ -1,5 +1,6 @@
 package com.sim.membermanagement;
 
+import com.sim.membermanagement.aop.TimeTraceAop;
 import com.sim.membermanagement.repository.MemberRepository;
 import com.sim.membermanagement.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
