@@ -16,23 +16,17 @@ public class MemberService {
     // 회원 리포지토리의 코드가 회원 서비스 코드를 DI 가능하게 변경
     public MemberService(MemberRepository memberRepository) {
         this.memberRepository = memberRepository;
+
     }
 
     /**
      * 회원 가입
      */
     public Long join(Member member) {
-
-        long start = System.currentTimeMillis(); // 메서드 시간 측정 로직
-        try {
             validateDuplicateMember(member); // 중복회원 검증
             memberRepository.save(member);
             return member.getId();
-        }finally {
-            long finish = System.currentTimeMillis();
-            long timeMs = finish - start;
-            System.out.println("join = " + timeMs+"ms");
-        }
+
         /*
         Optional<Member> result = memberRepository.findByName(member.getName());
         // result 가 Optional이기 때문에 가능한 문법
@@ -53,14 +47,7 @@ public class MemberService {
      * 전체 회원 조회
      */
     public List<Member> findMembers() {
-        long start = System.currentTimeMillis(); // 메서드 시간 측정 로직
-        try {
-            return memberRepository.findAll();
-        } finally {
-            long finish = System.currentTimeMillis();
-            long timeMs = finish - start;
-            System.out.println("findMembers = " + timeMs + "ms");
-        }
+        return memberRepository.findAll();
     }
 
     public Optional<Member> findOne(Long memberId) {
