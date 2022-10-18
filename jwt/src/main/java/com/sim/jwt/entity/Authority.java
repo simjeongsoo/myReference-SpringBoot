@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "user")
+@Table(name = "authority")
 @Getter
 @Setter // entity에 setter 생성하면 안됨
 @Builder
