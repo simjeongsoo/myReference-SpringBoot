@@ -1,0 +1,28 @@
+spring:
+  # JPA config
+  jpa:
+    hibernate:
+      ddl-auto: create    # DB Table Auto Create
+    show-sql: true        # Hibernate DDL,DML log print
+    properties:
+      hibernate:
+        format_sql: true  # query indentation
+        highlight_sql: true
+
+  # H2 console config
+  h2:
+    console:
+      enabled: true
+
+  # DB Connection config
+  datasource:
+    url: jdbc:h2:tcp://localhost/~/study    # inMemory DB
+    driver-class-name: org.h2.Driver        # DB Driver
+    username: sa
+
+# log JDBC bind parameters
+logging:
+  level:
+    org.hibernate.type: trace
+
+
