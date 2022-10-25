@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<div class="container">
+  <div>
+    <table>
+      <thead>
+      <tr>
+        <th>#</th>
+        <th>이름</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="member : ${allMembers}"> <!--loop, 첫번째 객채를 ${members}에서 꺼내서 member에 담음 -->
+        <td th:text="${member.id}"></td> <!-- member의 id와 name을 출력 -->
+        <td th:text="${member.name}"></td> <!--member.id 는 Member 의 getter로 꺼내온것 -->
+        <td th:text="${member.email}"></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div> <!-- /container -->
+
+</body>
+</html>
