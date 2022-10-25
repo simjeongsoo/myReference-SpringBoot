@@ -27,4 +27,10 @@ public class Member {
         this.name = name;
         this.email = email;
     }
+
+    public void update(String name, String email) {
+        //--더티 체킹--//
+        this.name = name;
+        this.email = email;
+    }
 }
