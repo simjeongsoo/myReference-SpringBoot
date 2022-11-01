@@ -1,6 +1,7 @@
 package com.sim.test.crudtestpractice.controller;
 
 import com.sim.test.crudtestpractice.domain.Member;
+import com.sim.test.crudtestpractice.dto.MemberJoinRequestDto;
 import com.sim.test.crudtestpractice.form.MemberForm;
 import com.sim.test.crudtestpractice.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,14 +29,21 @@ public class MemberController {
     @PostMapping("/members/new")
     public String create(MemberForm form) {      // 회원 등록 api
 
-        // 멤버 엔티티에 데이터 저장
-        Member member = Member.builder()
+//        // 멤버 엔티티에 데이터 저장
+//        Member member = Member.builder()
+//                .name(form.getFormName())
+//                .email(form.getFormEmail())
+//                .build();
+
+        // Controller -> Service 계층 dto로 data 전달
+        MemberJoinRequestDto joinRequestDto = MemberJoinRequestDto.builder()
                 .name(form.getFormName())
                 .email(form.getFormEmail())
                 .build();
 
         // 회원가입 로직 실행
-        memberService.join(member);
+//        memberService.join(member);
+        memberService.join(joinRequestDto);
 
         return "redirect:/";
     }
