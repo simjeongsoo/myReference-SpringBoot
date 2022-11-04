@@ -32,8 +32,10 @@ public class Order {
     @JoinColumn(name = "delivery_id")   // fk , 연관 관계의 주인(수정과 업데이트가 이루어짐)
     private Delivery delivery;
 
+    // order_date
     private LocalDateTime orderDate;    // 주문 시간
 
+    // order_status
     @Enumerated(EnumType.STRING)        // default : ORDINAL, ORDINAL로 구현 시 추가된 데이터에 의해 로직이 꼬임
     private OrderStatus orderStatus;    // 주문 상태 [ORDER, CANCEL]
 }

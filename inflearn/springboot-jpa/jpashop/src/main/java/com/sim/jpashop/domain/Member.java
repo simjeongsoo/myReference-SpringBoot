@@ -23,5 +23,5 @@ public class Member {
     private Address address;        // 주소 정보
 
     @OneToMany(mappedBy = "member") // Order 테이블에 있는 "memeber" 필드에 의해서 매핑되었다는 의미 , 읽기 전용
-    private List<Order> orders = new ArrayList<>();
+    private List<Order> orders = new ArrayList<>(); // 컬렉션은 필드에서 바로 초기화(null 무넺에서 안전)
 }
