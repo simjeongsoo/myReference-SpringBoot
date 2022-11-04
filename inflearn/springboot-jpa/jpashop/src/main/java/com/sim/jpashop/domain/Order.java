@@ -25,10 +25,14 @@ public class Order {
     @JoinColumn(name = "member_id")     // fk , 연관 관계의 주인(수정과 업데이트가 이루어짐)
     private Member member;
 
-    @OneToMany(mappedBy = "order")      // OrderItem 테이블에 있는 "order" 필드에 의해서 매핑되었다는 의미 , 읽기 전용
+    // 1. OrderItem 테이블에 있는 "order" 필드에 의해서 매핑되었다는 의미 , 읽기 전용
+    // 2. orderItems컬렉션에 데이터를 넣어두고 Order만 저장하면 컬렉션도 같이 저장
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<OrderItem> orderItems = new ArrayList<>();
 
-    @OneToOne(fetch = FetchType.LAZY)  // 모든 연관관계는 지연로딩으로 설정, , @xToOne 관계는 기본이 즉시로딩
+    // 모든 연관관계는 지연로딩으로 설정, , @xToOne 관계는 기본이 즉시로딩
+    // Order를 persist 할때 delivery 엔티티도 같이 persist
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "delivery_id")   // fk , 연관 관계의 주인(수정과 업데이트가 이루어짐)
     private Delivery delivery;
 
@@ -38,4 +42,20 @@ public class Order {
     // order_status
     @Enumerated(EnumType.STRING)        // default : ORDINAL, ORDINAL로 구현 시 추가된 데이터에 의해 로직이 꼬임
     private OrderStatus orderStatus;    // 주문 상태 [ORDER, CANCEL]
+
+    //==연관관계 편의 메서드==//
+    public void serMember(Member member) {
+        this.member = member;
+        member.getOrders().add(this);
+    }
+
+    public void addOrderItem(OrderItem orderItem) {
+        orderItems.add(orderItem);
+        orderItem.setOrder(this);
+    }
+
+    public void setDelivery(Delivery delivery) {
+        this.delivery = delivery;
+        delivery.setOrder(this);
+    }
 }
