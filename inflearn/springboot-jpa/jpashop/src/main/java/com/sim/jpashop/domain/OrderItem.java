@@ -17,11 +17,11 @@ public class OrderItem {
     @Column(name = "order_item_id")
     private Long id;                // pk, 식별자
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)  // 모든 연관관계는 지연로딩으로 설정, , @xToOne 관계는 기본이 즉시로딩
     @JoinColumn(name = "item_id")   // fk , 연관 관계의 주인(수정과 업데이트가 이루어짐)
     private Item item;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)  // 모든 연관관계는 지연로딩으로 설정, , @xToOne 관계는 기본이 즉시로딩
     @JoinColumn(name = "order_id")  // fk , 연관 관계의 주인(수정과 업데이트가 이루어짐)
     private Order order;
 

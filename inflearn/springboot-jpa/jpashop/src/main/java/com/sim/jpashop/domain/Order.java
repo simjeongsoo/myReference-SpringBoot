@@ -21,14 +21,14 @@ public class Order {
     @Column(name = "order_id")
     private Long id;                    // pk, 식별자
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)  // 모든 연관관계는 지연로딩으로 설정, , @xToOne 관계는 기본이 즉시로딩
     @JoinColumn(name = "member_id")     // fk , 연관 관계의 주인(수정과 업데이트가 이루어짐)
     private Member member;
 
     @OneToMany(mappedBy = "order")      // OrderItem 테이블에 있는 "order" 필드에 의해서 매핑되었다는 의미 , 읽기 전용
     private List<OrderItem> orderItems = new ArrayList<>();
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)  // 모든 연관관계는 지연로딩으로 설정, , @xToOne 관계는 기본이 즉시로딩
     @JoinColumn(name = "delivery_id")   // fk , 연관 관계의 주인(수정과 업데이트가 이루어짐)
     private Delivery delivery;
 

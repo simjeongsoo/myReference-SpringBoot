@@ -16,7 +16,7 @@ public class Delivery {
     @Column(name = "delivery_id")
     private Long id;                    // pk, 식별자
 
-    @OneToOne(mappedBy = "delivery")    //  Order 테이블에 있는 "delivery" 필드에 의해서 매핑되었다는 의미 , 읽기 전용
+    @OneToOne(mappedBy = "delivery", fetch = FetchType.LAZY)    //  Order 테이블에 있는 "delivery" 필드에 의해서 매핑되었다는 의미 , 읽기 전용
     private Order order;
 
     @Embedded

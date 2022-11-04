@@ -32,7 +32,7 @@ public class Category {
 
 
     //--셀프로 양방향 연관관계를 매핑--//
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)  // 모든 연관관계는 지연로딩으로 설정, , @xToOne 관계는 기본이 즉시로딩
     @JoinColumn(name = "parent_id")
     private Category parent;
 
