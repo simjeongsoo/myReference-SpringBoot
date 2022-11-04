@@ -19,14 +19,14 @@ public class MemberRepository {
 //    private EntityManagerFactory emf;
 
     //--저장--//
-    private void save(Member member) {
+    public void save(Member member) {
         // em이 persist하면 영속성 컨텍스트에 member엔티티를 넣고,
         // 나중에 transaction이 commit되는 시점에 db에 insert쿼리를 날림
         em.persist(member);
     }
 
     //--단건 조회--//
-    private Member findOne(Long id) {
+    public Member findOne(Long id) {
         // jpa의 find()메서드사용 , 단건조회
         // (return 타입, pk)
         return em.find(Member.class, id);
