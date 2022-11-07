@@ -9,13 +9,16 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
+// JPA의 모든 변경이나 로직들은 트랜잭션 안에서 실행 되어야 한다.
+// 클래스 범위에 @Transactional을 추가하면 public 메서드에 적용
 @Transactional(readOnly = true)
 public class MemberService {
 
     @Autowired
-    private MemberRepository memberRepository;
+    private MemberRepository memberRepository; // 필드 인젝션
 
     //--회원 가입--//
+    @Transactional // 데이터를 변경하는 메서드에는 readOnly = true 를 사용하면 안됨
     public Long join(Member member) {
         validateDuplicatedMember(member); // 중복 회원 검증
         memberRepository.save(member);
@@ -23,6 +26,7 @@ public class MemberService {
     }
 
     private void validateDuplicatedMember(Member member) {
+        // EXCEPTION
         // 중복 회원 검증 메서드
         List<Member> findMembers = memberRepository.findName(member.getName());
         if (!findMembers.isEmpty()) {
