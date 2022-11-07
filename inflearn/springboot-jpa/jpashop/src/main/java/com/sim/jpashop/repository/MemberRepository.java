@@ -1,6 +1,7 @@
 package com.sim.jpashop.repository;
 
 import com.sim.jpashop.domain.Member;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -10,10 +11,13 @@ import javax.persistence.PersistenceUnit;
 import java.util.List;
 
 @Repository
+@RequiredArgsConstructor
 public class MemberRepository {
 
-    @PersistenceContext         // spring이 EntityManager를 생성 후 주입
-    private EntityManager em;
+//    @PersistenceContext         // spring이 EntityManager를 생성 후 주입
+//    private EntityManager em;
+
+    private final EntityManager em; // 스프링 데이터 JPA를 사용하면 EntityManager 도 주입 가능
 
 //    @PersistenceUnit            // EntityManagerFactory 주입
 //    private EntityManagerFactory emf;
