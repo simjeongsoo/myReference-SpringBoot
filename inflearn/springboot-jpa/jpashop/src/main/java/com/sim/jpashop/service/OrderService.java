@@ -53,6 +53,15 @@ public class OrderService {
     /**
      * 취소
      */
+    @Transactional  // 데이터 변경
+    public void cancelOrder(Long orderId) {
+        // 주문 엔티티 조회
+        Order order = orderRepository.findOne(orderId);
+        // 주문 취소
+        order.cancel(); // 엔티티의 데이터만 바꾸면 JPA가 알아서 바뀐 변경포인트들을 찾아서 DB에 업데이트 쿼리를 날려줌(터티체킹, 변경내역감지)
+                        // order.cancel() 을 호출하면  OrderStatus 가변경되어 Order에 업데이트 쿼리가 날라가고
+                        // Item의 stockQuantity 도 업데이트 쿼리가 날라가 원복이 된다.
+    }
 
     /**
      * 검색
