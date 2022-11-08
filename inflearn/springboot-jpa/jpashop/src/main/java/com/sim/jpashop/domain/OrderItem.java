@@ -32,4 +32,13 @@ public class OrderItem {
     public void cancel() {
         getItem().addStock(count); // 재고수량 원복
     }
+
+    //==조회 로직==//
+    /**
+     * 주문 상품 전제 가격 조회
+     */
+    public int getTotalPrice() {
+        // 주문 가격 * 주문 수량
+        return getOrderPrice() * getCount();
+    }
 }
