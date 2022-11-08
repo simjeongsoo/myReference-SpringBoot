@@ -49,6 +49,7 @@ public class OrderItem {
     }
 
     //==비즈니스 로직==/
+    // 비즈니스 로직 대부분이 엔티티에 있고 서비스 계층은 단순히 엔티티에 필요한 요청을 위임하는 역할을 하는 도메인 모델 패턴
     public void cancel() {
         getItem().addStock(count); // 재고수량 원복
     }

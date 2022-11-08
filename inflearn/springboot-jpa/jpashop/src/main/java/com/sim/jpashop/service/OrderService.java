@@ -17,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class OrderService {
+    //--서비스 계층은 단순히 엔티티에 필요한 요청을 위임하는 역할(도메인 모델 패턴)--//
 
     private final OrderRepository orderRepository;
     private final MemberRepository memberRepository;
@@ -41,7 +42,7 @@ public class OrderService {
 //        OrderItem orderItem1 = new OrderItem()    // 'OrderItem()' has protected access in 'com.sim.jpashop.domain.OrderItem'
 
         //주문 생성
-        Order order = Order.createOrder(member, delivery, orderItem);
+        Order order = Order.createOrder(member, delivery, orderItem); // 파라미터를 여러개 넘기면 여러상품 주문 가능하게 구현할 수 있다.
 
         //주문 저장
         // cascade , delivery, orderItems 컬렉션에 데이터를 넣어두고 Order만 저장하면 컬렉션도 같이 저장
