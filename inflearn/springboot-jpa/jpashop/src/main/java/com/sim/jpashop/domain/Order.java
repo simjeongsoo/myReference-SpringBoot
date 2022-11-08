@@ -72,4 +72,21 @@ public class Order {
         order.setOrderDate(LocalDateTime.now());    // 주문 시간 세팅
         return order;
     }
+
+    //==비즈니스 로직==//
+    /**
+     * 주문 취소
+     */
+    public void cancel() {
+        if (delivery.getStatus() == DeliveryStatus.COMP) {
+            // 배송 완료시 취소 불가
+            throw new IllegalStateException("이미 배송완료된 상품은 취소가 불가능 합니다.");
+        }
+        this.setOrderStatus(OrderStatus.CANCEL);    // OrderStatus 변경
+        for (OrderItem orderItem : orderItems) {
+            // 재고 원복 loop
+
+            orderItem.cancel(); // orderItem 수량 원복
+        }
+    }
 }
