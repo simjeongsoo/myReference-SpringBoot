@@ -29,7 +29,7 @@ public class OrderItem {
     private int count;              // 주문 수량
 
     //==생성 메서드==//
-    public static OrderItem createOrder(Item item, int orderPrice, int count) {
+    public static OrderItem createOrderItem(Item item, int orderPrice, int count) {
         // orderPrice 의 변경 가능성이 있기 때문에 파라미터로 따로 세팅
 
         OrderItem orderItem = new OrderItem();
