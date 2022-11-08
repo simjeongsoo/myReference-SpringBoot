@@ -1,6 +1,8 @@
 package com.sim.jpashop.domain;
 
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -11,6 +13,7 @@ import java.util.List;
 @Entity
 @Table(name = "orders")
 @Getter @Setter
+@NoArgsConstructor(access = AccessLevel.PROTECTED) // 기본 생성자를 protected로 생성
 public class Order {
     // 주문 엔티티
     //--한 번 주문시 여러 상품을 주문할 수 있으므로 주문(Order)과 주문상품( OrderItem )은 일대다 관계

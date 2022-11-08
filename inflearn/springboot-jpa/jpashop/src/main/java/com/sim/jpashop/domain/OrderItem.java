@@ -1,13 +1,16 @@
 package com.sim.jpashop.domain;
 
 import com.sim.jpashop.domain.item.Item;
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
 
 @Entity
 @Getter @Setter
+@NoArgsConstructor(access = AccessLevel.PROTECTED) // 기본 생성자를 protected로 생성
 public class OrderItem {
     // 주문 상품 엔티티
     //--주문한 상품 정보와 주문 금액( orderPrice ), 주문 수량( count ) 정보를 가짐
@@ -27,6 +30,10 @@ public class OrderItem {
 
     private int orderPrice;         // 주문 가격
     private int count;              // 주문 수량
+
+//    protected OrderItem() {
+//        // createOrderItem() 이외의 생성을 막아주는 protected 생성자
+//    }
 
     //==생성 메서드==//
     public static OrderItem createOrderItem(Item item, int orderPrice, int count) {
