@@ -44,7 +44,7 @@ public class Order {
     private OrderStatus orderStatus;    // 주문 상태 [ORDER, CANCEL]
 
     //==연관관계 편의 메서드==//
-    public void serMember(Member member) {
+    public void setMember(Member member) {
         this.member = member;
         member.getOrders().add(this);
     }
@@ -57,5 +57,19 @@ public class Order {
     public void setDelivery(Delivery delivery) {
         this.delivery = delivery;
         delivery.setOrder(this);
+    }
+
+    //==생성 메서드==//
+    public static Order createOrder(Member member, Delivery delivery, OrderItem... orderItems) {
+        // 생성 시점 변경시 이 메서드만 수정하면 됨
+        Order order = new Order();
+        order.setMember(member);
+        order.setDelivery(delivery);
+        for (OrderItem orderItem : orderItems) {
+            order.addOrderItem(orderItem);
+        }
+        order.setOrderStatus(OrderStatus.ORDER);    // 주문 상태 세팅
+        order.setOrderDate(LocalDateTime.now());    // 주문 시간 세팅
+        return order;
     }
 }
