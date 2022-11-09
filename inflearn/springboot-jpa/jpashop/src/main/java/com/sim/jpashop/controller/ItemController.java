@@ -70,9 +70,10 @@ public class ItemController {
      * 상품 수정
      */
     @PostMapping("/items/{itemId}/edit")
-    public String updateItem(@ModelAttribute("form") BookForm form) {
+    public String updateItem(@PathVariable Long itemId, @ModelAttribute("form") BookForm form) {
         // 보안을 위해 사용자의 권한체크가 필요(id 값을 다루기 때문)
-
+/*
+        // 컨트롤러에서 엔티티 생성x
         Book book = new Book();
         book.setId(form.getId());
         book.setName(form.getName());
@@ -80,8 +81,11 @@ public class ItemController {
         book.setStockQuantity(form.getStockQuantity());
         book.setAuthor(form.getAuthor());
         book.setIsbn(form.getIsbn());
-
         itemService.saveItem(book);
+*/
+        // 권장 코드
+        itemService.updateItem(itemId, form.getName(), form.getPrice(), form.getStockQuantity());
+
         return "redirect:/items";
     }
 }
