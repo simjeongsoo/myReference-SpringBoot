@@ -4,11 +4,13 @@ import com.sim.jpashop.domain.Order;
 import com.sim.jpashop.domain.OrderSearch;
 import com.sim.jpashop.domain.OrderStatus;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.boot.model.source.internal.hbm.XmlElementMetadata;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
 import org.thymeleaf.model.IStandaloneElementTag;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.*;
 import java.util.ArrayList;
@@ -41,6 +43,39 @@ public class OrderRepository {
                 .getResultList();
     }
 
+    /**
+     * Querydsl
+     */
+    /*
+    public List<Order> findAllByQuerydsl(OrderSearch orderSearch) {
+        //--데이터가 없을 경우 동적 쿼리, 실무o [ver3.Querydsl로 처리] --//
+        QOrder order = QOrder.order;
+        QMember member = QMember.member;
+
+        return query
+                .select(order)
+                .from(order)
+                .join(order.member, member)
+                .where(statusEq(orderSearch.getOrderStatus())
+                        ,nameLike(orderSearch.getMemberName()))
+                .limit(1000)
+                .fetch();
+    }
+
+    private BooleanExpression statusEq(OrderStatus statusCond) {
+        if (statusCond == null) {
+            return null;
+        }
+        return order.status.eq(statusCond);
+    }
+
+    private BooleanExpression nameLike(String nameCond) {
+        if (!StringUtils.hasText(nameCond)) {
+            return null;
+        }
+        return member.name.like(nameCond);
+    }
+*/
     /**
      * JPA Criteria
      */
