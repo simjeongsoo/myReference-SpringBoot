@@ -1,10 +1,13 @@
 package com.sim.jpashop.repository;
 
 import com.sim.jpashop.domain.Order;
+import com.sim.jpashop.domain.OrderSearch;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
+import org.springframework.util.StringUtils;
 
 import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
 import java.util.List;
 
 @Repository
@@ -22,8 +25,18 @@ public class OrderRepository {
     }
 
     //--검색--//
-//    public List<Order> findAll(OrderSearch orderSearch) {
-//
-//    }
+    public List<Order> findAll(OrderSearch orderSearch) {
+        // 데이터가 전부 있을때의 검색 쿼리 로직
+        return em.createQuery("select o from Order o join o.member m" +
+                        " where o.orderStatus = :orderstatus" +
+                        " and m.name like :name", Order.class)
+                .setParameter("orderstatus", orderSearch.getOrderStatus())
+                .setParameter("name", orderSearch.getMemberName())
+//                .setFirstResult(100) // 페이징
+                .setMaxResults(1000) // 최대 1000건
+                .getResultList();
+
+
+    }
 
 }
