@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -18,15 +19,15 @@ public class MemberController {
 
     private final MemberService memberService;
 
-    @GetMapping("/members/new")
+    @GetMapping("/members/new") // 회원 등록 폼
     public String createForm(Model model) {
         model.addAttribute("memberForm", new MemberForm());
         return "members/createMemberForm";
     }
 
-    @PostMapping("/members/new")
+    @PostMapping("/members/new") // 회원 등록 컨트롤러
     public String create(@Valid MemberForm form, BindingResult result) { // @Valid 로 MemberForm의 어노테이션 검증
-                                                                         // @Valid 뒤에 BindingResult 파라미터가 있으면 오류를 담음
+        // @Valid 뒤에 BindingResult 파라미터가 있으면 오류를 담음
         if (result.hasErrors()) {
             // 에러 발생시 return
             return "members/createMemberForm";
@@ -40,6 +41,12 @@ public class MemberController {
 
         memberService.join(member);
         return "redirect:/";
+    }
 
+    @GetMapping("/members") // 회원 목록 컨트롤러
+    public String list(Model model) {
+        List<Member> members = memberService.findMembers();
+        model.addAttribute("members", members);
+        return "/members/memberList";
     }
 }
