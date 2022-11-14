@@ -1,17 +1,15 @@
 package com.sim.jpashop.service;
 
-import com.sim.jpashop.domain.Delivery;
-import com.sim.jpashop.domain.Member;
-import com.sim.jpashop.domain.Order;
-import com.sim.jpashop.domain.OrderItem;
+import com.sim.jpashop.domain.*;
 import com.sim.jpashop.domain.item.Item;
 import com.sim.jpashop.repository.ItemRepository;
 import com.sim.jpashop.repository.MemberRepository;
 import com.sim.jpashop.repository.OrderRepository;
 import lombok.RequiredArgsConstructor;
-import org.aspectj.weaver.ast.Or;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 @Transactional(readOnly = true)
@@ -67,7 +65,7 @@ public class OrderService {
     /**
      * 검색
      */
-//    public List<Order> findOrders(OrderSearch orderSearch) {
-//        return orderRepository.findAll(orderSearch)
-//    }
+    public List<Order> findOrders(OrderSearch orderSearch) {
+        return orderRepository.findAllByCriteria(orderSearch);
+    }
 }
