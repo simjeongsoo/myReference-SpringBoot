@@ -91,7 +91,7 @@ public class OrderRepository {
 
         // 주문 상태 검색
         if (orderSearch.getOrderStatus() != null) {
-            Predicate status = cb.equal(o.get("status"), orderSearch.getOrderStatus());
+            Predicate status = cb.equal(o.get("orderStatus"), orderSearch.getOrderStatus());
             criteria.add(status);
         }
 
@@ -139,7 +139,7 @@ public class OrderRepository {
         TypedQuery<Order> query = em.createQuery(jpql, Order.class)
                 .setMaxResults(1000); //최대 1000건
         if (orderSearch.getOrderStatus() != null) {
-            query = query.setParameter("status", orderSearch.getOrderStatus());
+            query = query.setParameter("orderStatus", orderSearch.getOrderStatus());
         }
         if (StringUtils.hasText(orderSearch.getMemberName())) {
             query = query.setParameter("name", orderSearch.getMemberName());
