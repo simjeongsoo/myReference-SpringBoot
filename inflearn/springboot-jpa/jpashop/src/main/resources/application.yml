@@ -12,10 +12,10 @@ spring:
       hibernate:
         format_sql: true
         highlight_sql: true
-#        show_sql: true   # System.out log
+        show_sql: true   # System.out log
 
 logging:
   level:
     org.hibernate.sql: debug
-#    org.hibernate.type: trace # parameter binding
+    org.hibernate.type: trace # parameter binding
 
